@@ -558,7 +558,7 @@ void GFXSetup()
 		fclose(fp);
 	}
 
-		if (fp = fopen("similarity.bin", "r"))
+	if (fp = fopen("similarity.bin", "r"))
 	{
 		if ((n = fread(&ColorSimilarity, 1, 256 * 256 * 256, fp)) != (256 * 256 * 256)){ printf("sim exit : %lu\n", n); exit(1); }
 		if ((n = fread(&PaletteSimilarity, 1, NESCOLORCOUNT * NESCOLORCOUNT * NESCOLORCOUNT * NESCOLORCOUNT, fp)) != (NESCOLORCOUNT * NESCOLORCOUNT * NESCOLORCOUNT * NESCOLORCOUNT)){ printf("sim exit2 : %lu\n", n); exit(1); }
@@ -777,6 +777,13 @@ void FitFrame(char *bmp, PPUFrame *theFrame, int startline, int endline)
 	unsigned char bestNesColor;
 	unsigned char prevBestNesColor;
 	unsigned char *pal;
+
+	if (startline != 0) {
+		FILE *fp;
+		fp = fopen("testframe2.bgra", "w");
+
+		fwrite(bmp, 307200, 1, fp);
+	}
 
 
 	if (startline == 0)
